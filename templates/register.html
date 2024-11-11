@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Registration Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #006c97; /* Dark theme background */
+            color: #ffffff; /* Light text color */
+        }
+
+        .card {
+            background-color: #003f5c; /* Darker card background */
+            color: #e0e0e0; /* Light text inside card */
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00c3e3; /* Heading color */
+        }
+
+        h3 {
+            color: #ffffff;
+        }
+
+        label {
+            color: #b0c7d6;
+        }
+
+        .form-control {
+            background-color: #004c6d; /* Darker input field */
+            color: #ffffff !important; /* Ensure text is white while typing */
+            border: 1px solid #007ea7;
+        }
+
+        .form-control::placeholder {
+            color: #b0c7d6;
+        }
+
+        .form-control:focus {
+            background-color: #00587a;
+            color: #ffffff; /* Text remains white on focus */
+            border-color: #00c3e3;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: #00c3e3;
+            border-color: #00c3e3;
+        }
+
+        .btn-primary:hover {
+            background-color: #007ea7;
+            border-color: #007ea7;
+        }
+
+        a {
+            color: #00c3e3;
+        }
+
+        a:hover {
+            color: #007ea7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Registration form -->
+        <form class="col-6 mx-auto card p-4 shadow-lg" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <!-- Registration form heading -->
+            <h1>Todo App</h1>
+            <h3>Register</h3>
+            <hr>
+
+            <!-- Display error/success messages -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- First Name input field -->
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required>
+            </div>
+
+            <!-- Last Name input field -->
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Last Name" required>
+            </div>
+
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
+            </div>
+
+            <!-- Password input field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+            </div>
+
+            <!-- Link to login page for users who already have an account -->
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #006c97; /* Dark theme background */
+            color: #ffffff; /* Light text color */
+        }
+
+        .card {
+            background-color: #003f5c; /* Darker card background */
+            color: #e0e0e0; /* Light text inside card */
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00c3e3; /* Heading color */
+        }
+
+        h3 {
+            color: #ffffff;
+        }
+
+        label {
+            color: #b0c7d6;
+        }
+
+        .form-control {
+            background-color: #004c6d; /* Darker input field */
+            color: #ffffff !important; /* Input text color remains white while typing */
+            border: 1px solid #007ea7;
+        }
+
+        .form-control::placeholder {
+            color: #b0c7d6; /* Placeholder text color */
+        }
+
+        .form-control:focus {
+            background-color: #00587a;
+            color: #ffffff;
+            border-color: #00c3e3;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: #00c3e3;
+            border-color: #00c3e3;
+        }
+
+        .btn-primary:hover {
+            background-color: #007ea7;
+            border-color: #007ea7;
+        }
+
+        a {
+            color: #00c3e3;
+        }
+
+        a:hover {
+            color: #007ea7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Login form -->
+        <form class="col-6 mx-auto card p-4 shadow-lg" method="post" action="{% url 'login' %}">
+            <h1>Todo App</h1>
+            
+            {% csrf_token %}
+
+            <!-- Login heading -->
+            <h3>Login</h3>
+            <hr>
+
+            <!-- Display error/success messages -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+            </div>
+
+            <!-- Password input field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+            </div>
+
+            <!-- Link to registration page -->
+            <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+</body>
+</html>

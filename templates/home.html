@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body {
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            background-color: #006c97;
+        }
+
+        nav {
+            padding: 0; /* No padding */
+            margin: 0; /* No margin */
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ff4242;
+            padding: 10px; /* Padding inside navbar */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px; /* Adds space between links */
+        }
+
+        .nav-links a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            padding: 5px;
+            transition: all 0.3s ease; 
+    
+        }
+        .nav-links a:hover {
+            text-decoration: underline; /* Add underline on hover */
+            background-color: #ffffff; /* Change background color on hover */
+            color: rgb(0, 0, 0); /* Change text color on hover */
+        }
+
+        .container {
+            text-align: center;
+            margin: 100px auto;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #49b5eeb6;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%; /* Make sure the image is responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+
+    </nav>
+
+    <div class="container">
+        <h1>Welcome to My TODO APP</h1>
+        <div class="nav-links">
+            <a href="{% url 'login' %}"><h2>Login</h2></a>
+        </div>
+        <img src="https://i.ibb.co/RNB6jpM/welcome.gif" alt="Welcome Cartoon">
+    </div>
+</body>
+</html>
