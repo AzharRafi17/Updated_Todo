@@ -4,80 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* General Page Styles */
         body {
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
-            background-color: #006c97;
-        }
-
-        nav {
-            padding: 0; /* No padding */
-            margin: 0; /* No margin */
-            font-family: Arial, sans-serif;
-        }
-
-        .navbar {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #2c3e50, #34495e); /* Softer gradient, more professional */
+            color: #fff;
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ff4242;
-            padding: 10px; /* Padding inside navbar */
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 10px; /* Adds space between links */
-        }
-
-        .nav-links a {
-            color: rgb(0, 0, 0);
-            text-decoration: none;
-            padding: 5px;
-            transition: all 0.3s ease; 
-    
-        }
-        .nav-links a:hover {
-            text-decoration: underline; /* Add underline on hover */
-            background-color: #ffffff; /* Change background color on hover */
-            color: rgb(0, 0, 0); /* Change text color on hover */
-        }
-
-        .container {
-            text-align: center;
-            margin: 100px auto;
-            max-width: 500px;
-            padding: 20px;
-            background-color: #49b5eeb6;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            flex-direction: column;
+            animation: fadeIn 1s ease-out; /* Fade-in effect on body */
         }
-
+    
+        /* Container Styling */
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            margin-top: 50px;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInContainer 1s ease-out forwards; /* Fade-in effect with movement */
+        }
+    
+        /* Header Styling */
         h1 {
-            color: rgb(0, 0, 0);
-            font-weight: bold;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+            opacity: 0;
+            animation: fadeInHeader 1s ease-out 0.5s forwards; /* Fade-in effect with delay */
         }
-
+    
+        /* Button Styling */
+        .btn-custom {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: fadeInButton 1s ease-out 1s forwards; /* Fade-in effect for button */
+        }
+    
+        .btn-custom:hover {
+            background: linear-gradient(45deg, #ff7eb3, #ff758c);
+            transform: translateY(-3px);
+        }
+    
+        /* Image Styling */
         img {
-            max-width: 100%; /* Make sure the image is responsive */
-            height: auto; /* Maintain aspect ratio */
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInImage 1s ease-out 1.5s forwards; /* Fade-in with scale-up effect */
+        }
+    
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    
+        @keyframes fadeInContainer {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        @keyframes fadeInHeader {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        @keyframes fadeInButton {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    
+        @keyframes fadeInImage {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
+    
 </head>
 <body>
 
-    </nav>
-
-    <div class="container">
-        <h1>Welcome to My TODO APP</h1>
-        <div class="nav-links">
-            <a href="{% url 'login' %}"><h2>Login</h2></a>
+    <!-- Main Container -->
+    <div class="container mt-5">
+        <h1>Stay Organized & Achieve More</h1>
+        <p>Manage your tasks efficiently with our TODO APP.</p>
+        <a href="{% url 'login' %}" class="btn btn-custom mt-4">Login</a>
+        <div class="lottie-animation">
+            <!-- Lottie Animation -->
+            <lottie-player 
+                id="lottieAnimation" 
+                src="https://assets1.lottiefiles.com/packages/lf20_tfb3estd.json" 
+                background="transparent" 
+                speed="1" 
+                style="width: 100%; height: auto;" 
+                autoplay>
+            </lottie-player>
         </div>
-        <img src="https://i.ibb.co/RNB6jpM/welcome.gif" alt="Welcome Cartoon">
-    </div>
+        <script>
+            // Get the Lottie animation player
+            const lottiePlayer = document.getElementById('lottieAnimation');
+        
+            // Listen for the 'complete' event which fires when the animation finishes
+            lottiePlayer.addEventListener('complete', function () {
+                // Pause the animation when it finishes so it remains on the last frame
+                lottiePlayer.pause();
+            });
+        </script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</body>
 </body>
 </html>

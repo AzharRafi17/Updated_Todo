@@ -122,21 +122,18 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+USE_TZ = True
+TIME_ZONE = 'Asia/Karachi'
 
 # Celery Configuration
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_ENABLE_UTC = False
 CELERY_TIMEZONE = 'Asia/Karachi'
-CELERY_BEAT_SCHEDULE = {
-    'send_reminders_every_minute': {
-        'task': 'todo.tasks.send_reminder_email',
-        'schedule': 60.0,  # Har 60 seconds (1 minute) baad task chalega
-    },
-}
 
 # Email settings (example using Gmail)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -147,6 +144,3 @@ EMAIL_HOST_USER = 'muhammadazharali17@gmail.com'
 EMAIL_HOST_PASSWORD = 'zbeo slgd zpuz adbx'
 EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = 'Celery <muhammadazharali17@gmail.com>'
-
-TIME_ZONE = 'Asia/Karachi' 
-USE_TZ = True 

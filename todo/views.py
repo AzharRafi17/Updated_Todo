@@ -6,8 +6,7 @@ from .forms import TaskForm
 from django.contrib import messages
 from .tasks import send_reminder_email
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 def home(request):
     return render(request, 'home.html')
@@ -43,7 +42,7 @@ def register(request):
             username=username,
             first_name=first_name,
             last_name=last_name,
-            password=password
+            password=password,
         )
         
         messages.success(request, "Account created successfully")
@@ -68,33 +67,20 @@ def task_list(request):
         user_tasks = user_tasks.order_by('-priority')
     else:
         user_tasks = user_tasks.order_by('due_date')
-        
-    upcoming_tasks = Task.objects.filter(
-        user=request.user,
-        reminder_time__lte=timezone.now() + timedelta(minutes=1),
-        reminder_time__gt=timezone.now(),
-        completed=False 
-    )
-
-    for task in upcoming_tasks:
-        
-        send_reminder_email.apply_async((task.id,), eta=task.reminder_time)
 
     return render(request, 'index.html', {'user_task': user_tasks})
 
 def add_task(request):
+    print(request.user.email)
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
         due_date = request.POST.get('due_date')
-        reminder_time = request.POST.get('reminder_time')
+        reminder_time = datetime.strptime(request.POST.get('reminder_time'), '%Y-%m-%dT%H:%M')
         priority = request.POST.get('priority')
-
         category_name = request.POST.get('category')
-
-        
         category = Category.objects.filter(name=category_name).first()
-
+        
         if category and title and due_date:
             task = Task.objects.create(
                 user=request.user,
@@ -107,7 +93,10 @@ def add_task(request):
             )
             task.save()
 
-   
+            if reminder_time:
+                countdown = (reminder_time - datetime.now()).total_seconds()
+                send_reminder_email.apply_async((task.id,), countdown=countdown)
+    
     user_tasks = Task.objects.filter(user=request.user)
     
     # Filter by completion status
@@ -170,4 +159,4 @@ def complete_task(request, task_id):
 
 def logout_user(request):
     logout(request)
-    return redirect('home') 
+    return redirect('login') 

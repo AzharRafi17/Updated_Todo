@@ -13,12 +13,4 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
-TIME_ZONE = 'Asia/Karachi' 
-USE_TZ = True 
 
-app.conf.beat_schedule = {
-    'send-reminder-email-every-minute': {
-        'task': 'todo.tasks.send_reminder_email',
-        'schedule': crontab(minute='*/1'),  # Runs every minute
-    },
-}
